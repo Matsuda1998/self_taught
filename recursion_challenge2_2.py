@@ -1,9 +1,9 @@
 # Definition for singly-linked list.
 from typing import Optional
 class ListNode:
-     def __init__(self, val=0, next=None):
-         self.val = val
-         self.next = next
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 """leetcodeのサイトでListNodeを入れるコンテナをどう実装しているか
 不明だが下記コードでＯＫがでた。サンプルの[1,2,2,1]の各要素がListNode,
 それのコンテナもリストノード？
@@ -72,3 +72,40 @@ linkedlist1.append(ListNode(2))
 linkedlist1.append(ListNode(1))
 a=Solution()
 a.isPalindrome(linkedlist1)
+
+
+"""解答のListNodeクラスにコンテナ化するメソッドを書いてみる
+これができれば１００％
+できた！恐らくleetcodeのなかのListNodeクラスはこうなっている筈！"""
+from typing import Optional
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    def append(self,new_node):#new_nodeにアノテーションでデータ型指定(:Listnode)
+                              #するとnameErrorでるのでこれをあきらめる
+                              #恐らくListNodeのクラス定義が終わってないのに使った為
+        if self is None:
+            self=new_node
+            return
+        current=self
+        while current.next is not None:
+            current=current.next
+        current.next=new_node
+        return
+
+class Solution:
+    def isPalindrome(self, head:Optional[ListNode]) -> bool:
+        l=[]
+        while head is not None:
+            l.append(head.val)
+            head = head.next
+        reverse_l=l[::-1]
+        return l == reverse_l
+
+my_listnode=ListNode(1)
+my_listnode.append(ListNode(2))
+my_listnode.append(ListNode(2))
+my_listnode.append(ListNode(1))
+
+Solution().isPalindrome(my_listnode)
