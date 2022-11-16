@@ -7,22 +7,23 @@ class ListNode:
 class Solution:# returnもListNodeなのでチェック用ではだめ。
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         n = 1
-        while head.next is not None:
-            head = head.next
-            n += 1
         m = 1
+        measure = head
         current = head
-        while m <= (n // 2) and current.next is not None :
-            temp = current
-            current = current.next
+        new_head = ListNode()
+        new_current = ListNode()
+        while measure.next is not None: # headの要素数を数える
+            measure = measure.next
+            n += 1
+        while current.next is not None and m <= n//2 : # headを直接ループさせない
+            current = current.next                     # 頭の位置を残しておく
             m += 1
-            del temp
-        return current
-
-            
-
-
-
+        new_head = current
+        new_current = new_head
+        while current.next is not None and new_current.next is not None:
+            current = current.next
+            new_current = new_current.next
+        return new_head # new_currentにすると最後だけリターンされる
 
 
 # チェック用
