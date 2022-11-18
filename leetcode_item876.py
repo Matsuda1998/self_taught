@@ -25,6 +25,21 @@ class Solution:# returnもListNodeなのでチェック用ではだめ。
             new_current = new_current.next
         return new_head # new_currentにすると最後だけリターンされる
 
+#上の提出用をオプチマイズ。これだけでよかった(leetcode.comで検証済み)
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        n = 1
+        m = 1
+        measure = head
+        current = head
+        while measure.next is not None: # headの要素数を数える
+            measure = measure.next
+            n += 1
+        while current.next is not None and m <= n//2 :
+            current = current.next
+            m += 1
+        return current 
+
 
 # チェック用
 from typing import Optional
