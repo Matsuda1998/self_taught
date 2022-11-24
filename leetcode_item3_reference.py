@@ -5,7 +5,7 @@ class Solution:
         chars = {}
         ans = 0
         for i,ch in enumerate(s):
-            if ch in chars and chars[ch] > j:
+            if ch in chars and chars[ch] > j: # and以下は今回の命題だけならいらない。一般化すれば必要
                 j = chars[ch] # jをその文字要素が前回出て来たインデックスに合わせる
             else:
                 if ans < i-j: #要素と要素の間隔が従来の記録を上回れば
