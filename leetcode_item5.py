@@ -66,3 +66,12 @@ class Solution:
                 start, size = l, size + 1
                 
         return s[start:start+size]
+
+#動的計画法(Dynamic Programming)を開設したブログより　https://www.momoyama-usagi.com/entry/info-algo-dp
+def fib1(n):
+    if n <= 1:
+        return 1
+    else:
+        return fib1(n-1) + fib1(n-2)
+ 
+print(fib1(4))
