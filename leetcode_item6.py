@@ -15,9 +15,13 @@ class Solution:
             else:
                 j -= 1
                 flag = 1
-        return mtrx #リストを文字に直す。ロジックはＯＫ
+        ans = ""
+        for i in range(len(mtrx)):
+            for j in mtrx[i]:
+                ans += j
+        return ans
 
-Solution().convert("PAYPALISHIRING",4)
+Solution().convert("PAYPALISHIRING",3)
 
 
 
