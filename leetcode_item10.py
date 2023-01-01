@@ -160,6 +160,32 @@ class Solution:
             return new_s == s
 Solution().isMatch("aaa",".*a")
 
+#アスタリスクのパターンを考え書き直してみる
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        lp = len(p)
+        i  = 0
+        ls = len(s)
+        j  = 0
+        if "*" not in p and lp != ls:
+            return False
+        while i < lp and j < ls:
+            if i+1 < lp and p[i] != s[j] and p[i] != "." and p[i+1] != "*":
+                return False
+            if i+1 < lp and (p[i] == s[j] or p[i] == ".") and p[i+1] != "*":
+                i += 1
+                j += 1
+                continue
+            if i+1 < lp and p[i+1] == "*":
+                if  i+2 < lp and p[i+2] == s[j]:#０回繰り返しの時
+                    
+
+            
+
+
+
+
+
 
 
 
