@@ -163,30 +163,121 @@ Solution().isMatch("aaa",".*a")
 #アスタリスクのパターンを考え書き直してみる
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
+        m = p.count("*")
+        index_list = []
+        new_s_list = []
+        n = m -1
+        for i in range(m):
+            index_list.append(([0]*3**n+[1]*3**n+[2]*3**n)*3**i)
+            n -= 1
         lp = len(p)
         i  = 0
         ls = len(s)
         j  = 0
-        if "*" not in p and lp != ls:
+        if m == 0 and lp != ls: # m==0のときのループもいる？いる。179行がエラーになる
             return False
-        while i < lp and j < ls:
-            if i+1 < lp and p[i] != s[j] and p[i] != "." and p[i+1] != "*":
-                return False
-            if i+1 < lp and (p[i] == s[j] or p[i] == ".") and p[i+1] != "*":
-                i += 1
-                j += 1
+        if m == 0 :
+            index_list =[[1]]
+        for x in range(len(index_list[0])): # この位置じゃない？ここだと無限ループ？
+            new_s = ""
+            y = 0
+            while i+1 < lp and j+1 < ls:
+                if p[i] != s[j] and p[i] != "." and p[i+1] != "*":
+                    return False
+                if (p[i] == s[j] or p[i] == ".") and p[i+1] != "*":
+                    new_s += s[j]
+                    i += 1
+                    j += 1
+                    continue
+                if p[i+1] == "*":
+                    if index_list[y][x] == 0:
+                        if i+2 < lp and p[i+2] == s[j]:
+                            new_s += s[j]
+                            i += 3
+                            j += 1
+                            y += 1
+                        else:
+                            new_s += "$"
+                            break
+                    if index_list[y][x] == 1:
+                        if p[i] == s[j] or p[i] == ".":
+                            new_s += s[j]
+                            i += 2
+                            j += 1
+                            y += 1
+                        else:
+                            new_s += "$"
+                            break
+                    if index_list[y][x] == 2:
+                        if i+2 < lp and p[i] == s[j]:
+                            while p[i] == s[j]:
+                                new_s += s[j]
+                                j += 1
+                            i += 2
+                            y += 1
+                        elif i+1 == lp and p[i] == s[j]:
+                            while p[i] == s[j]:
+                                new_s += s[j]
+                                j += 1
+                            if j == j-1 :
+                                new_s += s[j]
+                        elif i+1 == lp and p[i] == ".":
+                            return True
+                        elif i+2 < lp and p[i] == ".":
+
+
+
+                        pass
+            if i+1 == lp and j+1 == ls and (p[i] == s[j] or p[i] == "."):
+                new_s += s[j]
+            if "$" not in new_s :
+                new_s_list.append(new_s)
+        for ans in new_s_list :
+            if ans == s :
+                return True
+            else:
                 continue
-            if i+1 < lp and p[i+1] == "*":
-                if  i+2 < lp and p[i+2] == s[j]:#０回繰り返しの時
-                    
+        else :
+            return False
+
+Solution().isMatch("ababa","ab.bb")
+        
 
             
 
+                    
+                        
 
 
 
 
+l=[0]*3**2+[1]*3**2+[2]*3**2
+l=[0]*3**2+[1]*3**2+[2]*3**2
+l=[0,1,2]*3**0
+l=[0,1,2]*3**1
+m = 2
+l=[[]]*m
+print(l)
+l[0]=([0]*3**1+[1]*3**1+[2]*3**1)*3**0
+l[1]=([0]*3**0+[1]*3**0+[2]*3**0)*3**1
+print(l)
+m = 3
+l=[[]]*m
+l[0]=([0]*3**2+[1]*3**2+[2]*3**2)*3**0
+l[1]=([0]*3**1+[1]*3**1+[2]*3**1)*3**1
+l[2]=([0]*3**0+[1]*3**0+[2]*3**0)*3**2
+print(l)
+m = 2
+index_list = []
+n = m -1
+for i in range(m):
+    index_list.append(([0]*3**n+[1]*3**n+[2]*3**n)*3**i)
+    n -= 1
+print(index_list)
+len(index_list[0])
 
+for i in range(1):
+    print(i)
 
 
 
