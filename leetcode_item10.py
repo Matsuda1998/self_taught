@@ -223,7 +223,9 @@ class Solution:
                                 new_s += s[j]
                         elif i+1 == lp and p[i] == ".":
                             return True
-                        elif i+2 < lp and p[i] == ".":
+                        elif i+2 < lp and p[i] == ".": #ここがわからん
+                            """ s:abab 
+                                p:.*b最初のbを避ける方法"""
 
 
 
