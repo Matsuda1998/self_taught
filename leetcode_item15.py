@@ -108,7 +108,7 @@ Solution().threeSum([82597,-9243,62390,83030,-97960,-26521,-61011,83390,-38677,1
 from typing import List
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        nums.sort() # ソートするのがミソ。下記のようなコードにできる。
+        nums.sort() # ソートするのがミソ。下記のようなコードにできる。前にやった一番大きい面積求めるやつと同じ
         ans_list = []
         for i in range(len(nums)-2):
             if i > 0 and nums[i] == nums[i-1]:
